@@ -1,12 +1,13 @@
 import ImageGalleryItem from "../ImageGalleryItem/ImageGalleryItem"
+import { Gallery } from "./ImageGallery.styled";
 
-const ImageGallery = (props, onClick) => {
+const ImageGallery = ({ props, onClick }) => {
 
     return (
 
-        <ul className="gallery">
-            <ImageGalleryItem props={props.props} onClick={onClick} />
-        </ul>
+        <Gallery>
+            <ImageGalleryItem props={props} onClick={onClick} />
+        </Gallery>
     );
 };
 export default ImageGallery;

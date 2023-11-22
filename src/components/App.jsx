@@ -4,15 +4,17 @@ import { Searchbar } from "./Searchbar/Searchbar";
 import ImageGallery from "./ImageGallery/ImageGallery";
 import { Button } from "./Button/Button";
 import { Loader } from "./Loader/Loader";
+import Modal from "./Modal/Modal";
 
 export class App extends React.Component {
   state = {
     photos: [],
     query: "",
     page: 1,
-    loading: false,
     isVisibleBtn: false,
-    loading: false
+    loading: false,
+    showModal: false,
+    selectedImage: null,
   }
   getImage = async () => {
     const { query, page } = this.state;
@@ -41,9 +43,14 @@ export class App extends React.Component {
   onBtnLoadMoreClick = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   }
-
+  toggleModal = selectedImage => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+      selectedImage,
+    }));
+  };
   render() {
-    const { photos, isVisibleBtn, loading } = this.state
+    const { photos, isVisibleBtn, loading, selectedImage, showModal } = this.state
     return (
       <div
         style={{
@@ -52,7 +59,7 @@ export class App extends React.Component {
           justifyContent: 'center',
           alignItems: 'center',
           fontSize: 40,
-          color: '#010101'
+          color: '#010101',
         }}
       >
         <Searchbar onSubmit={this.handleSubmit} />
@@ -60,6 +67,9 @@ export class App extends React.Component {
         {loading && <Loader />}
         {isVisibleBtn && (
           <Button onClick={this.onBtnLoadMoreClick} />
+        )}
+        {showModal && (
+          <Modal onClose={this.toggleModal} ImageUrl={selectedImage} />
         )}
       </div >
     );

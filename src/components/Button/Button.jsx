@@ -1,10 +1,10 @@
-
+import { LoadMoreBtn } from "./Button.styled"
 
 export const Button = ({ onClick }) => {
     return (
-        <button type="button" onClick={() => onClick()}>
-            {/* {loading ? 'Loading...' : 'Load more'} */}
-            'Load more'
-        </button >
+        <LoadMoreBtn type="button" onClick={() => onClick()} >
+            Load more
+
+        </LoadMoreBtn >
     )
 }
